@@ -3,9 +3,10 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 const {
-    createPlayer
+    createPlayer,
+    login,
+    updateScore
 } = require('./controllers/playerController');
-const { create } = require('./models/Player');
 
 dotenv.config();
 
@@ -30,11 +31,15 @@ app.put('/', (req, res)=>{
     res.json({message: 'Welcome to Game Networking'});
 });
 
-app.post('/players', createPlayer);
+
 
 app.delete('/', (req, res)=>{
     res.json({message: 'Welcome to Game Networking'});
 });
+
+app.put('/players/:id', updateScore);
+app.post('/players/register', createPlayer);
+app.post('/players/login', login);
 
 app.listen(PORT, ()=> {
     console.log(`Server is running on port ${PORT}`)
